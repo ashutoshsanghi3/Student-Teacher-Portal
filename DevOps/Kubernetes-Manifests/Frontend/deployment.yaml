@@ -18,12 +18,12 @@ spec:
     spec: 
       containers:
       - name: frontend
-        image: avian19/frontend-mern:8
+        image: 314146295673.dkr.ecr.us-west-1.amazonaws.com/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
         - name: REACT_APP_API_BASE_URL
-          value: "http://<your-domain-name>/backend"
+          value: "/backend"
         - name: NODE_OPTIONS
           value: "--openssl-legacy-provider"

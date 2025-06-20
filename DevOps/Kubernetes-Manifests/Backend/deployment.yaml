@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: avian19/backend:1
+        image: 314146295673.dkr.ecr.us-west-1.amazonaws.com/backend:latest 
         imagePullPolicy: Always
         ports:
         - containerPort: 3500

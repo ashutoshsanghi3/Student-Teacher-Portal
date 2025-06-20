@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: database
-        image: avian19/mysql-mern:2
+        image: 314146295673.dkr.ecr.us-west-1.amazonaws.com/database:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3306
