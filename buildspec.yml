@@ -3,8 +3,8 @@ version: 0.2
 env:
   variables:
     ACCOUNT_ID: 314146295673
-    FRONTEND_REPO: student-teacher-frontend
-    BACKEND_REPO: student-teacher-backend
+    FRONTEND_REPO: frontend
+    BACKEND_REPO: backend
     FRONTEND_DIR: student-teacher-app
     BACKEND_DIR: backend
     K8S_MANIFEST_DIR: DevOps/Kubernetes-Manifests
