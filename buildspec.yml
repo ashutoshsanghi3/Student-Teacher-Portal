@@ -23,7 +23,7 @@ phases:
     commands:
       - echo Setting dynamic image tag...
       - export IMAGE_TAG=v1.${CODEBUILD_BUILD_NUMBER}
-      - echo Logging in to Amazon ECR in region: $REGION
+      - echo Logging in to Amazon ECR 
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
       - echo Logging in to Docker Hub...
       - echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
