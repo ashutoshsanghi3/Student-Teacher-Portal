@@ -3,8 +3,8 @@ version: 0.2
 env:
   variables:
     ACCOUNT_ID: 314146295673
-    FRONTEND_REPO: frontend
-    BACKEND_REPO: backend
+    FRONTEND_REPO: student-teacher-frontend
+    BACKEND_REPO: student-teacher-backend
     FRONTEND_DIR: student-teacher-app
     BACKEND_DIR: backend
     K8S_MANIFEST_DIR: DevOps/Kubernetes-Manifests
@@ -49,22 +49,21 @@ phases:
       - echo Preparing Kubernetes manifest output directory...
       - mkdir -p k8s-out
 
-      # --- FRONTEND ---
+      # FRONTEND
       - sed "s|IMAGE_PLACEHOLDER|${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$FRONTEND_REPO:$IMAGE_TAG|g" $K8S_MANIFEST_DIR/Frontend/deployment.yaml > k8s-out/frontend-deployment.yaml
       - cp $K8S_MANIFEST_DIR/Frontend/service.yaml k8s-out/frontend-service.yaml
 
-      # --- BACKEND ---
+      # BACKEND
       - sed "s|IMAGE_PLACEHOLDER|${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG|g" $K8S_MANIFEST_DIR/Backend/deployment.yaml > k8s-out/backend-deployment.yaml
       - cp $K8S_MANIFEST_DIR/Backend/service.yaml k8s-out/backend-service.yaml
 
-      # --- DATABASE ---
+      # DATABASE
       - cp $K8S_MANIFEST_DIR/Database/namespace.yaml k8s-out/database-namespace.yaml || true
       - cp $K8S_MANIFEST_DIR/Database/secrets.yaml k8s-out/database-secrets.yaml || true
 
-      # --- INGRESS ---
+      # INGRESS
       - cp $K8S_MANIFEST_DIR/ingress.yaml k8s-out/ingress.yaml || true
 
-      # --- DEBUG ---
       - echo "Final list of generated Kubernetes YAML files:"
       - find k8s-out/
 
