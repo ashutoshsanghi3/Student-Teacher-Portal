@@ -18,7 +18,11 @@ phases:
     commands:
       - echo Installing utilities...
       - yum install -y jq
-
+      - echo Installing sonar-scanner...
+      - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+      - unzip sonar-scanner.zip
+      - export PATH=$PATH:$PWD/sonar-scanner-4.8.0.2856-linux/bin
+      - sonar-scanner --version  # optional, to verify installation
   pre_build:
     commands:
       - echo Setting dynamic image tag...
@@ -31,6 +35,13 @@ phases:
       - cd $FRONTEND_DIR && npm install && cd -
       - echo Installing backend dependencies...
       - cd $BACKEND_DIR && npm install && cd -
+      - echo Sonar Qube
+      - |
+        sonar-scanner \
+          -Dsonar.projectKey=capstonesonar1 \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=http://18.226.98.166 \
+          -Dsonar.login=sqp_5c49ac5bdba6dd0461d1b58840ed1b612fe7e93b
 
   build:
     commands:
