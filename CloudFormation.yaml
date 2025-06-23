@@ -276,6 +276,7 @@ Resources:
     DependsOn: MyDBSubnetGroup
     Properties:
       DBInstanceIdentifier: !Ref MyDBName
+      DBName: !Ref MyDBName
       Engine: mysql
       EngineVersion: 8.0.36
       DBInstanceClass: db.t3.small
