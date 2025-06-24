@@ -10,7 +10,8 @@ env:
     K8S_MANIFEST_DIR: DevOps/Kubernetes-Manifests
     DOCKER_HUB_USERNAME: ashutoshsanghi
     DOCKER_HUB_PASSWORD: dckr_pat_JlGl968JH7EPE2qmM6I2PT1Mr-4
-
+    HOST_US_EAST_1: bXlzcWxkYXRhYmFzZS5jdnVzd20wbTZic2MudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29t
+    HOST_US_WEST_1: bXlzcWxkYXRhYmFzZS53ZXN0LnVzLmV4YW1wbGUuY29t
 phases:
   install:
     runtime-versions:
@@ -70,7 +71,15 @@ phases:
 
       # DATABASE
       - cp $K8S_MANIFEST_DIR/Database/namespace.yaml k8s-out/database-namespace.yaml || true
-      - cp $K8S_MANIFEST_DIR/Database/secrets.yaml k8s-out/database-secrets.yaml || true
+      - |
+        if [ "$REGION" = "us-east-1" ]; then
+          HOST_B64=$HOST_US_EAST_1
+        elif [ "$REGION" = "us-west-1" ]; then
+          HOST_B64=$HOST_US_WEST_1
+        else
+          echo "Unsupported region: $REGION" && exit 1
+        fi
+      - sed "s|HOST_PLACEHOLDER|$HOST_B64|g" $K8S_MANIFEST_DIR/Database/secrets.yaml > k8s-out/database-secrets.yaml
 
       # INGRESS
       - cp $K8S_MANIFEST_DIR/ingress.yaml k8s-out/ingress.yaml || true
