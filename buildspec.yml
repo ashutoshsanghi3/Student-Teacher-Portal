@@ -1,7 +1,7 @@
 version: 0.2
 
 env:
-  variables: 
+  variables:
     ACCOUNT_ID: 314146295673
     FRONTEND_REPO: frontend
     BACKEND_REPO: backend
