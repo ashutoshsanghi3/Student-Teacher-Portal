@@ -12,7 +12,7 @@ env:
     DOCKER_HUB_PASSWORD: dckr_pat_JlGl968JH7EPE2qmM6I2PT1Mr-4
     # Host (base64)
     HOST_US_EAST_1: bXlzcWxkYXRhYmFzZS5jdnVzd20wbTZic2MudXMtZWFzdC0xLnJkcy5hbWF6b25hd3MuY29t
-    HOST_US_WEST_1: bXlzcWxkYXRhYmFzZS53ZXN0LnVzLmV4YW1wbGUuY29t
+    HOST_US_WEST_1: bXlzcWxkYXRhYmFzZS5jNzJnc2NxbzAxd2wudXMtd2VzdC0xLnJkcy5hbWF6b25hd3MuY29t
     # Database name (base64)
     DB_US_EAST_1: bXlzcWxkYXRhYmFzZQ==
     DB_US_WEST_1: TXlzcWxkYXRhYmFzZQ==
