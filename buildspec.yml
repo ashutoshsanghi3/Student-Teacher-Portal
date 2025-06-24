@@ -15,7 +15,7 @@ env:
     HOST_US_WEST_1: bXlzcWxkYXRhYmFzZS5jNzJnc2NxbzAxd2wudXMtd2VzdC0xLnJkcy5hbWF6b25hd3MuY29t
     # Database name (base64)
     DB_US_EAST_1: bXlzcWxkYXRhYmFzZQ==
-    DB_US_WEST_1: TXlzcWxkYXRhYmFzZQ==
+    DB_US_WEST_1: TXlTUUxEYXRhYmFzZQ==
 phases:
   install:
     runtime-versions:
