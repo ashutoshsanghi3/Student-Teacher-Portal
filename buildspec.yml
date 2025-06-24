@@ -85,7 +85,8 @@ phases:
         else
           echo "Unsupported region: $REGION" && exit 1
         fi
-      - sed -e "s|HOST_PLACEHOLDER|$HOST_B64|g" \
+      - |
+        sed -e "s|HOST_PLACEHOLDER|$HOST_B64|g" \
             -e "s|DB_NAME_PLACEHOLDER|$DB_B64|g" \
             $K8S_MANIFEST_DIR/Database/secrets.yaml > k8s-out/database-secrets.yaml
 
