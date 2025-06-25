@@ -57,10 +57,16 @@ phases:
       - docker tag $FRONTEND_REPO:$IMAGE_TAG ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$FRONTEND_REPO:$IMAGE_TAG
       - docker build -t $BACKEND_REPO:$IMAGE_TAG $BACKEND_DIR
       - docker tag $BACKEND_REPO:$IMAGE_TAG ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG
+      
       - echo Scanning backend image with Trivy...
       - mkdir -p k8s-out
-      - export IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG
-      - trivy image $IMAGE_URI --severity CRITICAL,HIGH --format json --output k8s-out/trivy-report.json || echo "Trivy scan completed with findings"
+      - export BACKEND_IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG
+      - trivy image $BACKEND_IMAGE_URI --severity CRITICAL,HIGH --format json --output k8s-out/trivy-backend-report.json || echo "Trivy scan for backend completed with findings"
+
+      - echo Scanning frontend image with Trivy...
+      - export FRONTEND_IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$FRONTEND_REPO:latest
+      - trivy image $FRONTEND_IMAGE_URI --severity CRITICAL,HIGH --format json --output k8s-out/trivy-frontend-report.json || echo "Trivy scan for frontend completed with findings"
+
 
   post_build:
     commands:
@@ -106,7 +112,8 @@ artifacts:
   discard-paths: yes
   files:
     - '**/*.yaml'
-    - trivy-report.json
+    - trivy-backend-report.json
+    - trivy-frontend-report.json
 
 cache:
   paths:
