@@ -106,6 +106,7 @@ artifacts:
   discard-paths: yes
   files:
     - '**/*.yaml'
+    - trivy-report.json
 
 cache:
   paths:
