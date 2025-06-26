@@ -64,7 +64,7 @@ phases:
       - trivy image $BACKEND_IMAGE_URI --severity CRITICAL,HIGH --format json --output k8s-out/trivy-backend-report.json || echo "Trivy scan for backend completed with findings"
 
       - echo Scanning frontend image with Trivy...
-      - export FRONTEND_IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$FRONTEND_REPO:latest
+      - export FRONTEND_IMAGE_URI=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/$FRONTEND_REPO:$IMAGE_TAG
       - trivy image $FRONTEND_IMAGE_URI --severity CRITICAL,HIGH --format json --output k8s-out/trivy-frontend-report.json || echo "Trivy scan for frontend completed with findings"
 
 
